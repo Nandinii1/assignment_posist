@@ -1,0 +1,167 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+static int counte =0;
+unordered_set<string> ids;
+
+//this function generates 32 bit ids
+
+string generate_random_id()
+{
+
+    string xx = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+    string  zz;
+    int len = xx.length();
+bool pre = true;
+   do{
+        for(int i=0;i<32;i++)
+    {
+            int x = rand() %(len+1);
+            zz.push_back(xx[x]);
+
+    }
+    if(ids.find(zz) == ids.end())
+    {
+
+        pre = false;
+        zz ="";
+    }
+    else
+    {
+
+        ids.insert(zz);
+    }
+   }
+   while(pre ==true);
+
+   return zz;
+
+
+}
+struct node
+{
+    string timestamp;
+    int owner_id;
+    float value;
+    string owner_name;
+    int node_number;
+    string node_id;
+    string refrence_node_id;
+     vector<string >child_refrence_node_id;
+     string genesis_reference_node_id;
+     string hash_value;
+     vector<struct node *> children;
+
+
+
+
+};
+//checks if value is valid or not 
+bool check_valid_value(struct node *parent)
+{
+    
+    struct node *tempp,*childd;
+    
+    int value_parent  = parent->value;
+    int sum = 0;
+    for(it = children.begin(); it !=children.end(); it++ )    
+        {
+    if((sum < INT_MAX - (*it)->value) && (sum+ (*it)->value) < value_parent)
+    {
+        
+        sum = sum + (*it)->value;
+    }
+    else
+    {
+        
+        return false;
+    }
+    return true;
+}
+
+
+}
+struct node*initnode(int oid,float val,string owname,struct node *parent,struct node *genesis)
+
+{
+     time_t now = time(0);
+
+
+   tm *gmtm = gmtime(&now);
+   dt = asctime(gmtm);
+  timestamp = to_string(dt);
+  owner_id = oid;
+  value = val;
+  owner_name = owname;
+  node_number = counte++;
+  node_id =  generate_random_id();
+  refrence_node_id = parent->node_id;
+  genesis_reference_node_id = genesis->node_id;
+
+  //random function which will generate 32 bit id and node ids will be in hash to check if their are
+}
+
+struct node*create_node(int oid,float val,string owname,struct node *parent,struct node *genesis)
+{
+ struct node *temp;
+
+ temp = initnode(oid,val,owname,parent,genesis);
+
+ if(genesis == NULL)
+ {
+    refrence_node_id
+      genesis = temp;
+      s = temp;
+
+ }
+ else
+ {
+     parent->children.push_back(temp);
+     parent->child_refrence_node_id.push_back(temp->  node_id);
+
+
+
+ }
+    return genesis;
+
+}
+
+  void creatty(int ownid,float vall, string owne_name)
+  {
+        
+      //finds parent and all
+      //checks if value is valid or not
+     // and calls create_node function
+  }
+
+int main()
+{
+
+ struct node *gen;
+ gen = NULL;
+ bool inp = true;
+
+    int ownid;
+    float vall;
+    string owne_name;
+
+int inpp;
+ do
+ {
+     cout<<"\nenter owner id \t";
+     cin>>ownid;
+     cout<<"\n enter value\t";
+     cin>>vall;
+     cout<<"\n enter owner name\t";
+     cin.ignore();
+     getline(cin,owne_name);
+
+     creatty(ownid,vall,owne_name);
+
+     cout<<"\nwanna enter more data then press 1 else press 0\t";
+     cin>>inpp;
+
+ }
+ while(inpp == 1);
+
+}
